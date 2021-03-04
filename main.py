@@ -1,6 +1,7 @@
 
 class Input():
     def __init__(self):
+        self._value = None
         pass
 
     @property
@@ -14,10 +15,10 @@ class DummyInput(Input):
 
 
 class Output():
-    def setValue():
+    def setValue(self):
         raise "Not implemented"
 
-    def getvalue():
+    def getvalue(self):
         raise "Not implemented"
 
 
@@ -28,14 +29,14 @@ class Operands():
     def get_value(self):
         return self._value
 
-    def input():
+    def input(self):
         raise "Not Implemented"
 
-    def inputs():
+    def inputs(self):
         raise "Not Implemented"
 
     @property
-    def output():
+    def output(self):
         raise "Not Implemented"
 
     value = property(get_value, set_value)
@@ -99,6 +100,7 @@ class Operand_NOT(Operands):
 class Override():
     def __init__(self, input):
         self._input = input
+        self._value = False
         self._enabled = False
 
     @property
