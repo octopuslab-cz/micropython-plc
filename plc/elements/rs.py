@@ -1,7 +1,7 @@
-from plc.elements import PLC_element
+from plc.elements import PLCElement
 
 
-class PLC_element_RS(PLC_element):
+class PLCElementRS(PLCElement):
     def __init__(self, set_element=None, reset_element=None, initialvalue=False):
         self._set_element = set_element
         self._reset_element = reset_element

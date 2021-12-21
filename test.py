@@ -1,19 +1,19 @@
-from plc.operands.op_and import PLC_operand_AND, PLC_operand_NAND
-from plc.operands.op_or import PLC_operand_OR, PLC_operand_NOR
-from plc.operands.op_not import PLC_operand_NOT
-from plc.inputs.virtual import PLC_input_virtual
-from plc import Override_DYNAMIC
+from plc.operands.op_and import PLCOperandAND, PLCOperandNAND
+from plc.operands.op_or import PLCOperandOR, PLCOperandNOR
+from plc.operands.op_not import PLCOperandNOT
+from plc.inputs.virtual import PLCInputVirtual
+from plc import PLCOverrideDynamic
 
 
-a = PLC_operand_AND()
-na = PLC_operand_NAND()
-or1 = PLC_operand_OR()
+a = PLCOperandAND()
+na = PLCOperandNAND()
+or1 = PLCOperandOR()
 
-i1 = PLC_input_virtual(True)
-od1 = Override_DYNAMIC(i1)
-i2 = PLC_input_virtual(0)
-i3 = PLC_input_virtual("asd")
-i4 = PLC_input_virtual(True)
+i1 = PLCInputVirtual(True)
+od1 = PLCOverrideDynamic(i1)
+i2 = PLCInputVirtual(0)
+i3 = PLCInputVirtual("asd")
+i4 = PLCInputVirtual(True)
 
 
 def testint(inp, value, direction):
@@ -38,7 +38,7 @@ na.add_input(i3)
 or1.add_input(od1)
 or1.add_input(a)
 
-nt = PLC_operand_NOT(a)
+nt = PLCOperandNOT(a)
 
 print("AND: {}".format(a.output))
 print("NAND: {}".format(na.output))

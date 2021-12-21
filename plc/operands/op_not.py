@@ -1,9 +1,10 @@
-from plc.operands import PLC_operand
+from plc.operands import PLCOperand
 
 
-class PLC_operand_NOT(PLC_operand):
+class PLCOperandNOT(PLCOperand):
     def __init__(self, input):
         self._input = input
+
 
     @property
     def output(self):

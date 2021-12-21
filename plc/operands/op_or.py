@@ -1,12 +1,14 @@
-from plc.operands import PLC_operand
+from plc.operands import PLCOperand
 
 
-class PLC_operand_OR(PLC_operand):
+class PLCOperandOR(PLCOperand):
     def __init__(self, inputs=None):
         self._inputs = inputs or list()
 
+
     def add_input(self, input):
         self._inputs.append(input)
+
 
     @property
     def output(self):
@@ -18,7 +20,7 @@ class PLC_operand_OR(PLC_operand):
         return False
 
 
-class PLC_operand_NOR(PLC_operand_OR):
+class PLCOperandNOR(PLCOperandOR):
     @property
     def output(self):
         return not super().output

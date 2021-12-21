@@ -1,8 +1,8 @@
-from plc.elements.rs import PLC_element_RS
+from plc.elements.rs import PLCElementRS
 from utime import ticks_ms
 
 
-class PLC_element_RS_pulse(PLC_element_RS):
+class PLCElementRSPulse(PLCElementRS):
     def __init__(self, set_element=None, reset_element=None, initialvalue=False, pulse_s=3):
         self._set_element_old = False
         self._pulse_ms = pulse_s * 1000

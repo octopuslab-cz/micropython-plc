@@ -1,7 +1,7 @@
-from plc import PLC_base
+from plc import PLCBase
 
 
-class PLC_element(PLC_base):
+class PLCElement(PLCBase):
     def __init__(self, initialvalue=False):
         self._value = initialvalue
 

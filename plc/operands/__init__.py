@@ -1,12 +1,10 @@
-from plc import PLC_base
+from plc import PLCBase
 
 
-class PLC_operand(PLC_base):
-    def input(self):
-        raise NotImplementedError()
-
+class PLCOperand(PLCBase):
     def inputs(self):
         raise NotImplementedError()
+
 
     @property
     def output(self):

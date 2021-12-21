@@ -1,12 +1,12 @@
-from plc import PLC_base
+from plc import PLCBase
 
 
-class PLC_input_interrupt(PLC_base):
+class PLC_input_interrupt(PLCBase):
     FALLING = 0
     RISING = 1
 
 
-class PLC_input(PLC_base):
+class PLCInput(PLCBase):
     def __init__(self):
         self._value = None
         self._interrupts = []

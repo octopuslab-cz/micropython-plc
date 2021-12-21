@@ -2,11 +2,11 @@
 # Input / Output
 # Operand_AND / Operand_NAND / Operand_OR
 
-class PLC_base():
+class PLCBase():
     pass
 
 
-class PLC_exception(Exception):
+class PLCException(Exception):
     pass
 
 
@@ -18,7 +18,7 @@ class Output():
         raise "Not implemented"
 
 
-class Override():
+class PLCOverride(PLCBase):
     def __init__(self, input):
         self._input = input
         self._value = False
@@ -40,13 +40,13 @@ class Override():
             return self._input.output
 
 
-class Override_FIXED(Override):
+class OverrideFixed(PLCOverride):
     def __init__(self, input, value):
         self._value = value
         super().__init__(input)
 
 
-class Override_DYNAMIC(Override):
+class PLCOverrideDynamic(PLCOverride):
     def __init__(self, input):
         self._value = False
         super().__init__(input)
