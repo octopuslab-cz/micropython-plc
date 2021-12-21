@@ -2,6 +2,7 @@ from plc.operands.op_and import PLCOperandAND, PLCOperandNAND
 from plc.operands.op_or import PLCOperandOR, PLCOperandNOR
 from plc.operands.op_not import PLCOperandNOT
 from plc.inputs.virtual import PLCInputVirtual
+from plc.outputs.virtual import PLCOutputVirtual
 
 
 a = PLCOperandAND()
@@ -14,9 +15,12 @@ i2 = PLCInputVirtual(1)
 i3 = PLCInputVirtual(True)
 i4 = PLCInputVirtual(True)
 
+o1 = PLCOutputVirtual(a)
+
 
 def testint(inp, value, direction):
     print("Input {} changed to {} direction {}".format(inp, value, direction))
+    o1.update()
 
 
 print("Input 1: {}".format(i1.value))
