@@ -28,7 +28,7 @@ print("Input 2: {}".format(i2.value))
 print("Input 3: {}".format(i3.value))
 print("Input 4: {}".format(i4.value))
 
-i1.add_interrupt(testint)
+i1.add_event_on_change(testint)
 
 a.add_input(i1)
 a.add_input(i2)
