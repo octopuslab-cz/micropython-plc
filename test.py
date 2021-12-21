@@ -1,7 +1,7 @@
 from plc.operands.op_and import PLC_operand_AND, PLC_operand_NAND
 from plc.operands.op_or import PLC_operand_OR, PLC_operand_NOR
 from plc.operands.op_not import PLC_operand_NOT
-from plc.inputs.dummy import PLC_input_dummy
+from plc.inputs.virtual import PLC_input_virtual
 from plc import Override_DYNAMIC
 
 
@@ -9,16 +9,23 @@ a = PLC_operand_AND()
 na = PLC_operand_NAND()
 or1 = PLC_operand_OR()
 
-i1 = PLC_input_dummy(True)
+i1 = PLC_input_virtual(True)
 od1 = Override_DYNAMIC(i1)
-i2 = PLC_input_dummy(0)
-i3 = PLC_input_dummy("asd")
-i4 = PLC_input_dummy(True)
+i2 = PLC_input_virtual(0)
+i3 = PLC_input_virtual("asd")
+i4 = PLC_input_virtual(True)
+
+
+def testint(inp, value, direction):
+    print("Input {} changed to {} direction {}".format(inp, value, direction))
+
 
 print("Input 1: {}".format(i1.value))
 print("Input 2: {}".format(i2.value))
 print("Input 3: {}".format(i3.value))
 print("Input 4: {}".format(i4.value))
+
+i4.add_interrupt(testint)
 
 a.add_input(i1)
 a.add_input(i2)
@@ -40,7 +47,7 @@ print("OR: {}".format(or1.output))
 print("OD: {}".format(od1.output))
 
 
-i4._value = False
+i4.value = False
 od1.enabled = True
 print("OR: {}".format(or1.output))
 od1.value = False
