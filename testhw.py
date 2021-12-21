@@ -18,7 +18,7 @@ i1 = PLCInputVirtual(False)
 o1 = plc.outputs[0]
 
 plcin2 = plc.inputs[1]
-plcin2.add_interrupt(input_interrupt)
+plcin2.add_event_on_change(input_interrupt)
 nt = PLCOperandNOT(plcin2)
 o1.set_input(nt)
 
