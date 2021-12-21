@@ -40,5 +40,11 @@ class PLCOutputPin(PLCPin, PLCOutput):
         self.value = value
 
 
-class PLCInputPin(PLCPin):
-    pass
+class PLCInputPin(PLCPin, PLCInput):
+    def __init__(self, pin):
+        PLCPin.__init__(self, pin)
+        PLCInput.__init__(self)
+
+
+    def read(self):
+        self._value = self._pin.value
