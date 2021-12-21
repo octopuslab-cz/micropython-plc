@@ -33,9 +33,9 @@ class PLCOutputPin(PLCPin, PLCOutput):
     def __init__(self, pin):
         PLCPin.__init__(self, pin)
         PLCOutput.__init__(self)
-        self.add_interrupt(self.__handle_interrupt)
+        self.add_event_on_change(self._on_change)
     
-    def __handle_interrupt(self, obj, value, direction):
+    def _on_change(self, obj, value, direction):
         print("Output changed to {}".format(value))
         self.value = value
 
