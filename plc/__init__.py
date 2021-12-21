@@ -40,20 +40,10 @@ class PLCOverride(PLCBase):
             return self._input.output
 
 
-class OverrideFixed(PLCOverride):
-    def __init__(self, input, value):
-        self._value = value
-        super().__init__(input)
-
-
-class PLCOverrideDynamic(PLCOverride):
-    def __init__(self, input):
-        self._value = False
-        super().__init__(input)
-
     @property
     def value(self):
-        pass
+        return self._value
+
 
     @value.setter
     def value(self, value):

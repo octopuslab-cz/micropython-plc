@@ -2,7 +2,6 @@ from plc.operands.op_and import PLCOperandAND, PLCOperandNAND
 from plc.operands.op_or import PLCOperandOR, PLCOperandNOR
 from plc.operands.op_not import PLCOperandNOT
 from plc.inputs.virtual import PLCInputVirtual
-from plc import PLCOverrideDynamic
 
 
 a = PLCOperandAND()
