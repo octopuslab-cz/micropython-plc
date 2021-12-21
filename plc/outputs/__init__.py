@@ -5,16 +5,21 @@ class PLCOutput(PLCBase):
     def __init__(self, input = None):
         self._value = None
         self._input = input
-        self._interrupts = []
+        self._on_change_events = []
 
 
-    def __interrupt__(self, value, direction):
-        for f in self._interrupts:
+    def _on_change_event(self, value, direction):
+        for f in self._on_change_events:
             f(self, value, direction)
 
 
-    def add_interrupt(self, func):
-        self._interrupts.append(func)
+    def add_event_on_change(self, func):
+        self._on_change_events.append(func)
+
+
+    def remove_event_on_change(self, func):
+        if func in self._on_change_events:
+            del self._on_change_events[func]
 
 
     def set_input(self, input):
@@ -31,4 +36,4 @@ class PLCOutput(PLCBase):
 
         direction = PLCInterrupt.RISING if tmp else PLCInterrupt.FALLING
         self._value = tmp
-        self.__interrupt__(tmp, direction)
+        self._on_change_event(tmp, direction)
