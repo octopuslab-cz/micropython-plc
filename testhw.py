@@ -11,16 +11,14 @@ def input_interrupt(cls, value, direction):
     print("Handle change on {} to {}".format(cls,value))
     o1.update()
 
-
 plc = PLCOctopusLabShield(i2c)
 
 i1 = PLCInputVirtual(False)
 o1 = plc.outputs[0]
 
-plcin2 = plc.inputs[1]
-plcin2.add_event_on_change(input_interrupt)
-nt = PLCOperandNOT(plcin2)
+plc.inputs[1].add_event_on_change(input_interrupt)
+nt = PLCOperandNOT(plc.inputs[1])
 o1.set_input(nt)
 
 while True:
-    plcin2.read()
+    plc.inputs[1].read()
