@@ -1,9 +1,4 @@
-from plc import PLCBase
-
-
-class PLC_input_interrupt(PLCBase):
-    FALLING = 0
-    RISING = 1
+from plc import PLCBase, PLCInterrupt
 
 
 class PLCInput(PLCBase):
@@ -37,6 +32,6 @@ class PLCInput(PLCBase):
         if tmp == self._value:
             return
 
-        direction = PLC_input_interrupt.RISING if tmp else PLC_input_interrupt.FALLING
+        direction = PLCInterrupt.RISING if tmp else PLCInterrupt.FALLING
         self._value = tmp
         self.__interrupt__(tmp, direction)

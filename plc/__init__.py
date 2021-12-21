@@ -10,27 +10,27 @@ class PLCException(Exception):
     pass
 
 
-class Output():
-    def set_value(self):
-        raise "Not implemented"
-
-    def get_value(self):
-        raise "Not implemented"
+class PLCInterrupt(PLCBase):
+    FALLING = 0
+    RISING = 1
 
 
 class PLCOverride(PLCBase):
-    def __init__(self, input):
+    def __init__(self, input, enabled=False, value=False):
         self._input = input
-        self._value = False
-        self._enabled = False
+        self._enabled = enabled
+        self._value = value
+
 
     @property
     def enabled(self):
         return self._enabled
 
+
     @enabled.setter
-    def enabled(self, value):
-        self._enabled = value
+    def enabled(self, en):
+        self._enabled = en
+
 
     @property
     def output(self):
