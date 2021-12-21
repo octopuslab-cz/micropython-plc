@@ -1,6 +1,7 @@
 # Driver for OctopusLab PLC shield
 
 from plc import PLCBase
+from plc.inputs import PLCInput
 from plc.outputs import PLCOutput
 from plc.drivers.i2cexpander import I2CExpander, ExpanderPin
 

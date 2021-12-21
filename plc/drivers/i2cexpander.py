@@ -30,6 +30,7 @@ class I2CExpander():
 
 
     def pin_value(self, pin_num, value = None):
+        self._read_port()
         if value is None:
             mask = 0x1 << pin_num
             pin_val = self._value & mask
