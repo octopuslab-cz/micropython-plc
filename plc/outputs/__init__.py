@@ -2,7 +2,7 @@ from plc import PLCBase, PLCInterrupt
 
 
 class PLCOutput(PLCBase):
-    def __init__(self, input):
+    def __init__(self, input = None):
         self._value = None
         self._input = input
         self._interrupts = []
@@ -17,7 +17,14 @@ class PLCOutput(PLCBase):
         self._interrupts.append(func)
 
 
+    def set_input(self, input):
+        self._input = input
+
+
     def update(self):
+        if not self._input:
+            return
+
         tmp = self._input.output
         if tmp == self._value:
             return
