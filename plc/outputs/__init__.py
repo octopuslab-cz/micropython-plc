@@ -32,8 +32,3 @@ class PLCOutput(PLCBase):
         direction = PLCInterrupt.RISING if tmp else PLCInterrupt.FALLING
         self._value = tmp
         self.__interrupt__(tmp, direction)
-
-
-    @property
-    def value(self):
-        return self._value
