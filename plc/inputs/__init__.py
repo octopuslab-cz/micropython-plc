@@ -23,11 +23,13 @@ class PLC_input(PLC_base):
 
     @property
     def output(self):
-        return self._value
+        return self.value
+
 
     @property
     def value(self):
         return self._value
+
 
     @value.setter
     def value(self, value):
@@ -35,6 +37,6 @@ class PLC_input(PLC_base):
         if tmp == self._value:
             return
 
-        direction = PLC_input_interrupt.RISING if not tmp else PLC_input_interrupt.FALLING
+        direction = PLC_input_interrupt.RISING if tmp else PLC_input_interrupt.FALLING
         self._value = tmp
         self.__interrupt__(tmp, direction)
