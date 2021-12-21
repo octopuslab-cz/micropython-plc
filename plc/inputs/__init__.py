@@ -3,7 +3,7 @@ from plc import PLCBase, PLCInterrupt
 
 class PLCInput(PLCBase):
     def __init__(self):
-        self._value = None
+        self.__value = None
         self._interrupts = []
 
 
@@ -22,16 +22,16 @@ class PLCInput(PLCBase):
 
 
     @property
-    def value(self):
-        return self._value
+    def _value(self):
+        return self.__value
 
 
-    @value.setter
-    def value(self, value):
+    @_value.setter
+    def _value(self, value):
         tmp = bool(value)
-        if tmp == self._value:
+        if tmp == self.__value:
             return
 
         direction = PLCInterrupt.RISING if tmp else PLCInterrupt.FALLING
-        self._value = tmp
+        self.__value = tmp
         self.__interrupt__(tmp, direction)
