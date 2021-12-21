@@ -46,6 +46,12 @@ class I2CExpander():
 
 
     def __getitem__(self, pin):
+        if type(pin) == slice:
+            tmp = []
+            for p in range(pin.start, pin.stop, pin.step or 1):
+                tmp.append(self.__getitem__(p))
+            return tmp
+
         if not pin in self._pins:
             self._pins[pin] = ExpanderPin(pin, self)
         return self._pins[pin]
