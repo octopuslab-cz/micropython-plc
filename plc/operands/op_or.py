@@ -21,6 +21,13 @@ class PLCOperandOR(PLCOperand):
 
 
 class PLCOperandNOR(PLCOperandOR):
+    # Because micropython does not allow calling super().output property
+    # This ugly hack must be done
     @property
     def output(self):
-        return not super().output
+        for i in self._inputs:
+            val = i.output
+            if val:
+                return False
+
+        return True
