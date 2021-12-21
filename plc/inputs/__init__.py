@@ -7,9 +7,9 @@ class PLCInput(PLCBase):
         self._interrupts = []
 
 
-    def __interrupt__(self, direction, value):
+    def __interrupt__(self, value, direction):
         for f in self._interrupts:
-            f(self, direction, value)
+            f(self, value, direction)
 
 
     def add_interrupt(self, func):
