@@ -11,7 +11,7 @@ or1 = PLCOperandOR()
 nor1 = PLCOperandNOR()
 
 i1 = PLCInputVirtual(False, "vI1")
-i2 = PLCInputVirtual(1, "vI2")
+i2 = PLCInputVirtual(False, "vI2")
 i3 = PLCInputVirtual(True, "vI3")
 i4 = PLCInputVirtual(True, "vI4")
 
@@ -51,6 +51,14 @@ print("OR: {}".format(or1.output))
 print("NOR: {}".format(nor1.output))
 
 i1.value = True
+
+print("AND: {}".format(a.output))
+print("NAND: {}".format(na.output))
+print("NOT: {}".format(nt.output))
+print("OR: {}".format(or1.output))
+print("NOR: {}".format(nor1.output))
+
+i2.value = True
 
 print("AND: {}".format(a.output))
 print("NAND: {}".format(na.output))
