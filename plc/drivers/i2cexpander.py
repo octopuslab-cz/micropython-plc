@@ -6,44 +6,43 @@ class I2CExpander():
         self._address = address
         self._bussize = bussize
         self._pins = dict()
-        self._read_port()
 
 
     def _read_port(self):
-        port_value = self._i2c.readfrom(self._address, self._bussize // 8)
-        value = port_value[0]
+        tmp = self._i2c.readfrom(self._address, self._bussize // 8)
+        port_value = tmp[0]
 
         if self._bussize > 8:
-            value += port_value[1] << 8
+            port_value += tmp[1] << 8
 
-        self._value = value
-        return self._value
+        return port_value
 
 
-    def _write_port(self):
+    def _write_port(self, port_value):
         tmp = bytearray(self._bussize // 8)
-        tmp[0] = self._value
+        tmp[0] = port_value
         if self._bussize > 8:
-            tmp[1] = self._value >> 8
+            tmp[1] = port_value >> 8
 
         self._i2c.writeto(self._address, tmp)
 
 
-    def pin_value(self, pin_num, value = None):
-        self._read_port()
+    def pin_value(self, pin_num, value=None):
+        port_value = self._read_port()
+
         if value is None:
             mask = 0x1 << pin_num
-            pin_val = self._value & mask
+            pin_val = port_value & mask
             return 1 if pin_val == mask else 0
 
         pin_val = 0x1 << pin_num
 
         if value:
-            self._value |= pin_val
+            port_value |= pin_val
         else:
-            self._value &= ~pin_val
+            port_value &= ~pin_val
 
-        self._write_port()
+        self._write_port(port_value)
 
 
     def __getitem__(self, pin):
