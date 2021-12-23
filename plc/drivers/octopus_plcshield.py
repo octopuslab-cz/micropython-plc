@@ -6,7 +6,6 @@ from plc.outputs import PLCOutput
 from plc.drivers.i2cexpander import I2CExpander, ExpanderPin
 
 
-
 class PLCOctopusLabShield(PLCBase):
     def __init__(self, i2c):
         self._i2c = i2c
