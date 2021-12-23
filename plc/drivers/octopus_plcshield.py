@@ -41,7 +41,7 @@ class PLCOutputPin(PLCPin, PLCOutput):
 class PLCInputPin(PLCPin, PLCInput):
     def __init__(self, pin):
         PLCPin.__init__(self, pin)
-        PLCOutput.__init__(self, "PLC DI{}".format(pin))
+        PLCInput.__init__(self, "PLC DI{}".format(pin))
 
 
     def read(self):
