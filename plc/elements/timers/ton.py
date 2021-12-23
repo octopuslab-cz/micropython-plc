@@ -36,6 +36,10 @@ class PLCTimerOn(PLCTimer):
 
 
     def _start(self):
+        if self._active.output:
+            print("Thread still running, not running new one")
+            return
+
         _thread.start_new_thread(self._loop, ())
 
 
@@ -46,8 +50,9 @@ class PLCTimerOn(PLCTimer):
     def _loop(self):
         self._start_time = ticks_ms()
         self._active._value = True
+        self._kill_thread = False
 
-        print("Loop thread started at {}".format(self._start_time))
+        print("Loop thread started at {} AM:{} DL:{}".format(self._start_time, self._amount, self.delay))
 
         while not self._kill_thread:
             self._amount = ticks_ms() - self._start_time
