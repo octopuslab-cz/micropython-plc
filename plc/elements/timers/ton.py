@@ -12,10 +12,9 @@ class PLCTimerOn(PLCTimer):
         self._value = False
         input.add_event_on_change(self.__on_input_change)
         self._input = input
-        self._enabled = PLCBase("{}:Enabled".format(self.name))
-        self._active = PLCBase("{}:Active".format(self.name))
-        self.delay = delay
         self._start_time = None
+        self.delay = delay
+
 
 
     def __on_input_change(self, input, value, dir):
@@ -23,20 +22,12 @@ class PLCTimerOn(PLCTimer):
             self._start()
         else:
             self._stop()
-
-            # Wait for thread to fiish
-            while self._active.output:
-                pass
-
             self._amount = 0
             self._value = False
-            self._tt = False
-
-        self._enabled._value = value
 
 
     def _start(self):
-        if self._active.output:
+        if self._kill_thread:
             print("Thread still running, not running new one")
             return
 
@@ -49,9 +40,6 @@ class PLCTimerOn(PLCTimer):
 
     def _loop(self):
         self._start_time = ticks_ms()
-        self._active._value = True
-        self._kill_thread = False
-
         print("Loop thread started at {} AM:{} DL:{}".format(self._start_time, self._amount, self.delay))
 
         while not self._kill_thread:
@@ -59,25 +47,15 @@ class PLCTimerOn(PLCTimer):
 
             if self._amount >= self.delay:
                 self._value = True
-                self._stop()
+                break
 
-        self._active._value = False
+        self._kill_thread = False
         print("Loop thread stopped at {}".format(self._start_time))
                 
 
     @property
     def accum(self):
         return self._amount
-
-
-    @property
-    def active(self):
-        return self._active
-
-
-    @property
-    def enabled(self):
-        return self._enabled
 
 
     @property

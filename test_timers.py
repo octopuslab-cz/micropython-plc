@@ -23,7 +23,7 @@ nt = PLCOperandNOT(ton)
 
 from time import sleep
 for i in range(12):
-    print("Timer TT:{} EN:{} DN:{} NDN:{} Accum: {}".format(ton.active.output, ton.enabled.output, ton.output, nt.output, ton.accum))
+    print("Timer DN:{} NDN:{} Accum: {}".format(ton.output, nt.output, ton.accum))
     if i == 2:
         i1.value = True
         i1.value = False
