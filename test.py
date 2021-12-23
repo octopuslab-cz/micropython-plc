@@ -20,7 +20,6 @@ o1 = PLCOutputVirtual(a)
 
 def testint(inp, value, direction):
     print("Input {} changed to {} direction {}".format(inp, value, direction))
-    o1.update()
 
 
 print("Input 1: {}".format(i1.value))

@@ -36,6 +36,7 @@ class PLCBase():
 
 
     def _on_change_event(self, value, direction):
+        print("PLCBase: ev_change: {}: {}".format(self.name, value))
         for f in self._on_change_events:
             f(self, value, direction)
 
