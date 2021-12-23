@@ -23,10 +23,6 @@ class PLCOutput(PLCBase):
 
 
     def __on_input_change(self, input, value, dir):
-        self.update()
-
-
-    def update(self):
         if not self._input:
             return
 
