@@ -9,7 +9,6 @@ i2c.scan()
 
 def input_interrupt(cls, value, direction):
     print("Handle change on {} to {}".format(cls,value))
-    o1.update()
 
 plc = PLCOctopusLabShield(i2c)
 
