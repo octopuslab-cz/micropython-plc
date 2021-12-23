@@ -3,6 +3,7 @@ from plc.operands import PLCOperand
 
 class PLCOperandNOT(PLCOperand):
     def __init__(self, input):
+        super().__init__()
         self._input = input
 
 

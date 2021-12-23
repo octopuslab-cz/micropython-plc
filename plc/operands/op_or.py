@@ -3,6 +3,7 @@ from plc.operands import PLCOperand
 
 class PLCOperandOR(PLCOperand):
     def __init__(self, inputs=None):
+        super().__init__()
         self._inputs = inputs or list()
 
 
