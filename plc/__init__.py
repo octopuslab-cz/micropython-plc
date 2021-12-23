@@ -26,6 +26,10 @@ class PLCBase():
 
     @_value.setter
     def _value(self, value):
+        if value is None:
+            self.__value = None
+            return
+
         tmp = bool(value)
         if tmp == self.__value:
             return
