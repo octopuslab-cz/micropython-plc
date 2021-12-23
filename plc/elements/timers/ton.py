@@ -7,14 +7,16 @@ from plc.elements.timers import PLCTimer
 class PLCTimerOn(PLCTimer):
     def __init__(self, input, delay, name=None):
         super().__init__(name)
-        self._amount = 0
-        self._kill_thread = False
-        self._value = False
+
         input.add_event_on_change(self.__on_input_change)
         self._input = input
-        self._start_time = None
-        self.delay = delay
 
+        self._enabled = PLCBase("{}:EN".format(self.name))
+        self._active = PLCBase("{}:TT".format(self.name))
+
+        self._start_time = None
+        self._amount = 0
+        self.delay = delay
 
 
     def __on_input_change(self, input, value, dir):
@@ -22,40 +24,50 @@ class PLCTimerOn(PLCTimer):
             self._start()
         else:
             self._stop()
-            self._amount = 0
-            self._value = False
 
 
     def _start(self):
-        if self._kill_thread:
-            print("Thread still running, not running new one")
+        if self._active._value:
             return
 
-        _thread.start_new_thread(self._loop, ())
+        self._enabled._value = True
 
 
     def _stop(self):
-        self._kill_thread = True
+        self._enabled._value = False
+        self._active._value = False
+        self._value = False
+        self._amount = 0
 
 
-    def _loop(self):
-        self._start_time = ticks_ms()
-        print("Loop thread started at {} AM:{} DL:{}".format(self._start_time, self._amount, self.delay))
+    def loop(self):
+        if not self._enabled._value:
+            return
 
-        while not self._kill_thread:
-            self._amount = ticks_ms() - self._start_time
+        if self._value:
+            return
 
-            if self._amount >= self.delay:
-                self._value = True
-                break
+        if not self._active._value:
+            self._start_time = ticks_ms()
+            self._active._value = True
+            print("Loop enabled at {} AM:{} DL:{}".format(self._start_time, self._amount, self.delay))
 
-        self._kill_thread = False
-        print("Loop thread stopped at {}".format(self._start_time))
+        self._amount = ticks_ms() - self._start_time
+
+        if self._amount >= self.delay:
+            self._value = True
+            self._active._value = False
+            print("Loop thread stopped after {}ms".format(ticks_ms() - self._start_time))
                 
 
     @property
     def accum(self):
         return self._amount
+
+
+    @property
+    def activated(self):
+        return self._active
 
 
     @property
@@ -70,3 +82,6 @@ class PLCTimerOn(PLCTimer):
         
         self._delay = delay
 
+    @property
+    def enabled(self):
+        return self._enabled
