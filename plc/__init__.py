@@ -3,9 +3,15 @@
 # Operand_AND / Operand_NAND / Operand_OR
 
 class PLCBase():
-    def __init__(self):
+    def __init__(self, name = None):
         self.__value = None
+        self._name = name or type(self).__name__
         self._on_change_events = []
+
+
+    @property
+    def name(self):
+        return self._name
 
 
     @property
