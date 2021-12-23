@@ -20,10 +20,6 @@ class PLCOperandAND(PLCOperand):
         self._value = self.output
 
 
-    def __on_input_change(self, input, value, dir):
-        self._value = self.output
-
-
     @property
     def output(self):
         for i in self._inputs:

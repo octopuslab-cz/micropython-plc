@@ -8,7 +8,16 @@ class PLCOperandOR(PLCOperand):
 
 
     def add_input(self, input):
+        input.add_event_on_change(self.__on_input_change)
         self._inputs.append(input)
+        self._value = self.output
+
+
+    def remove_input(self, input):
+        if input not in self._inputs:
+            return
+
+        self._value = self.output
 
 
     @property
