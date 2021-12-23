@@ -2,7 +2,7 @@ from plc.elements import PLCElement
 
 
 class PLCElementRS(PLCElement):
-    def __init__(self, set_element=None, reset_element=None, name=None, value=False):
+    def __init__(self, set_element=None, reset_element=None, name=None, value=None):
         super().__init__(value, name)
         self.set = set_element
         self.reset = reset_element
@@ -41,7 +41,7 @@ class PLCElementRS(PLCElement):
         s = self._set_element.output
         r = self._reset_element.output
         if r == s:
-            return self._value
+            return self._value or s
 
         if s:
             self._value = True
