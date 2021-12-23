@@ -2,6 +2,10 @@
 # Input / Output
 # Operand_AND / Operand_NAND / Operand_OR
 
+__version__ = "0.0.1"
+__license__ = "MIT"
+__author__ = "Petr Kracik"
+
 class PLCBase():
     def __init__(self, name = None):
         self.__value = None
