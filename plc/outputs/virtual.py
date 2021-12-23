@@ -7,4 +7,4 @@ class PLCOutputVirtual(PLCOutput):
 
 
     def _on_change(self, obj, value, direction):
-        print("Virtual output {} changed to {}".format(self, value))
+        print("Virtual output \"{}\" changed to {}".format(self.name, value))
