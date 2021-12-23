@@ -10,12 +10,12 @@ na = PLCOperandNAND()
 or1 = PLCOperandOR()
 nor1 = PLCOperandNOR()
 
-i1 = PLCInputVirtual(False)
-i2 = PLCInputVirtual(1)
-i3 = PLCInputVirtual(True)
-i4 = PLCInputVirtual(True)
+i1 = PLCInputVirtual(False, "vI1")
+i2 = PLCInputVirtual(1, "vI2")
+i3 = PLCInputVirtual(True, "vI3")
+i4 = PLCInputVirtual(True, "vI4")
 
-o1 = PLCOutputVirtual(a)
+o1 = PLCOutputVirtual(a, "vO1")
 
 
 def testint(inp, value, direction):
