@@ -5,12 +5,16 @@ class PLCOutput(PLCBase):
     def __init__(self, input=None, name=None):
         super().__init__(name)
         self._value = None
-        self._input = input
-        if self._input:
-            self._input.add_event_on_change(self.__on_input_change)
+        self.input = input
 
 
-    def set_input(self, input):
+    @property
+    def input(self):
+        return self._input
+
+
+    @input.setter
+    def input(self, input):
         if not input:
             return
 

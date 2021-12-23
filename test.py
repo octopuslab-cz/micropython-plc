@@ -3,12 +3,14 @@ from plc.operands.op_or import PLCOperandOR, PLCOperandNOR
 from plc.operands.op_not import PLCOperandNOT
 from plc.inputs.virtual import PLCInputVirtual
 from plc.outputs.virtual import PLCOutputVirtual
+from plc.elements.rs import PLCElementRS
 
 
 a = PLCOperandAND()
 na = PLCOperandNAND()
 or1 = PLCOperandOR()
 nor1 = PLCOperandNOR()
+rs1 = PLCElementRS()
 
 i1 = PLCInputVirtual(False, "vI1")
 i2 = PLCInputVirtual(False, "vI2")
@@ -44,6 +46,9 @@ nor1.add_input(a)
 
 nt = PLCOperandNOT(a)
 
+rs1.set = i1
+rs1.reset = i2
+
 print("AND: {}".format(a.output))
 print("NAND: {}".format(na.output))
 print("NOT: {}".format(nt.output))
@@ -51,6 +56,13 @@ print("OR: {}".format(or1.output))
 print("NOR: {}".format(nor1.output))
 
 i1.value = True
+i1.value = False
+
+i2.value = True
+i2.value = False
+
+i1.value = True
+i2.value = True
 
 print("AND: {}".format(a.output))
 print("NAND: {}".format(na.output))
