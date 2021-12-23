@@ -22,10 +22,10 @@ def testint(inp, value, direction):
     print("Input {} changed to {} direction {}".format(inp, value, direction))
 
 
-print("Input 1: {}".format(i1.value))
-print("Input 2: {}".format(i2.value))
-print("Input 3: {}".format(i3.value))
-print("Input 4: {}".format(i4.value))
+print("Input 1: {}".format(i1.output))
+print("Input 2: {}".format(i2.output))
+print("Input 3: {}".format(i3.output))
+print("Input 4: {}".format(i4.output))
 
 i1.add_event_on_change(testint)
 
