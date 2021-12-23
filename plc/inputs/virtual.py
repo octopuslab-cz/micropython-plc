@@ -1,8 +1,8 @@
 from plc.inputs import PLCInput
 
 class PLCInputVirtual(PLCInput):
-    def __init__(self, value=0):
-        super().__init__()
+    def __init__(self, value=0, name=None):
+        super().__init__(name)
         self._value = value
 
 

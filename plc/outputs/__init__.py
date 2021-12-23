@@ -2,8 +2,8 @@ from plc import PLCBase, PLCInterrupt
 
 
 class PLCOutput(PLCBase):
-    def __init__(self, input = None):
-        super().__init__()
+    def __init__(self, input=None, name=None):
+        super().__init__(name)
         self._value = None
         self._input = input
 

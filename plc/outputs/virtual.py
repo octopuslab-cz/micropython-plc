@@ -1,8 +1,8 @@
 from plc.outputs import PLCOutput
 
 class PLCOutputVirtual(PLCOutput):
-    def __init__(self, input):
-        super().__init__(input)
+    def __init__(self, input, name=None):
+        super().__init__(input, name)
 
         self.add_event_on_change(self._on_change)
     

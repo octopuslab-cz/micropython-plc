@@ -2,8 +2,8 @@ from plc.operands import PLCOperand
 
 
 class PLCOperandAND(PLCOperand):
-    def __init__(self, inputs=None):
-        super().__init__()
+    def __init__(self, inputs=None, name=None):
+        super().__init__(name)
         self._inputs = inputs or list()
 
 
