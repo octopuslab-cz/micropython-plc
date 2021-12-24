@@ -3,6 +3,7 @@ from plc.drivers.octopus_plcshield import PLCOctopusLabShield
 
 from plc.elements.rs import PLCElementRS
 from plc.elements.timers.ton import PLCTimerOn
+from plc.elements.timers.tof import PLCTimerOff
 
 from plc.operands.op_not import PLCOperandNOT
 
@@ -35,19 +36,20 @@ plc_o1.input = nt
 #  Output 2 timer Done bit (output)
 #  Output 3 timer Enable bit
 #  Output 4 timer Active bit
-rs1 = PLCElementRS(plc_i2, plc_i3)
-ton = PLCTimerOn(rs1, 2000, "TON1")
+#rs1 = PLCElementRS(plc_i2, plc_i3)
+#ton = PLCTimerOn(rs1, 2000, "TON1")
+toff = PLCTimerOff(plc_i2, 2000, "TOFF1")
 
-ton_nt_dn = PLCOperandNOT(ton, "NOT: DN")
+ton_nt_dn = PLCOperandNOT(toff, "NOT: DN")
 plc_o2.input = ton_nt_dn
 
-ton_nt_en = PLCOperandNOT(ton.enabled, "NOT: EN")
+ton_nt_en = PLCOperandNOT(toff.enabled, "NOT: EN")
 plc_o3.input = ton_nt_en
 
-ton_nt_tt = PLCOperandNOT(ton.activated, "NOT: TT")
+ton_nt_tt = PLCOperandNOT(toff.activated, "NOT: TT")
 plc_o4.input = ton_nt_tt
 
 while True:
+    toff.loop()
     plc_i2.read()
-    plc_i3.read()
-    ton.loop()
+#    ton.loop()
