@@ -1,36 +1,25 @@
+from time import sleep
+
 from plc.operands.op_not import PLCOperandNOT
 from plc.inputs.virtual import PLCInputVirtual
 from plc.outputs.virtual import PLCOutputVirtual
 from plc.elements.rs import PLCElementRS
 from plc.elements.timers.ton import PLCTimerOn
-
-
-def testint(inp, value, direction):
-    print("Input {} changed to {} direction {}".format(inp, value, direction))
-
-
-rs1 = PLCElementRS()
-ton = PLCTimerOn(rs1, 2000, "Timer 1")
+from plc.elements.timers.tof import PLCTimerOff
 
 i1 = PLCInputVirtual(False, "vI1")
-i2 = PLCInputVirtual(False, "vI2")
-o1 = PLCOutputVirtual(ton, "vO1")
+toff = PLCTimerOff(i1, 2000, "Timer 1")
+o1 = PLCOutputVirtual(toff, "vO1")
 
-rs1.set = i1
-rs1.reset = i2
 
-nt = PLCOperandNOT(ton)
-
-from time import sleep
-for i in range(12):
-    ton.loop()
-    print("Timer DN:{} NDN:{} Accum: {}".format(ton.output, nt.output, ton.accum))
+for i in range(20):
+    toff.loop()
+    print("Timer DN:{} EN: {} TT: {} Accum: {}".format(toff.output, toff.enabled.output, toff.activated.output, toff.accum))
     if i == 2:
         i1.value = True
-        i1.value = False
 
-    if i == 8:
-        i2.value = True
+    if i == 6:
+        i1.value = False
 
     
     sleep(0.5)
