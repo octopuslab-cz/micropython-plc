@@ -58,14 +58,21 @@ class I2CExpander():
 
 
 class ExpanderPin():
-    def __init__(self, pin, expander):
-        self._pin = pin
+    def __init__(self, pin_num, expander):
+        self._pin_num = pin_num
         self._exp = expander
+
+
+    @property
+    def pin_num(self):
+        return self._pin_num
+
 
     @property
     def value(self):
-        return self._exp.pin_value(self._pin)
+        return self._exp.pin_value(self._pin_num)
+
 
     @value.setter
     def value(self, value):
-        self._exp.pin_value(self._pin, value)
+        self._exp.pin_value(self._pin_num, value)
