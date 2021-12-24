@@ -30,7 +30,7 @@ class PLCPin():
 class PLCOutputPin(PLCPin, PLCOutput):
     def __init__(self, pin):
         PLCPin.__init__(self, pin)
-        PLCOutput.__init__(self, None, "PLC DO{}".format(pin.pin_num+1))
+        PLCOutput.__init__(self, None, "PLC DO{}".format(pin.pin_num-3))
         self.add_event_on_change(self._on_change)
 
 
