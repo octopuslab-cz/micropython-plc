@@ -36,11 +36,14 @@ class PLCTimerOff(PLCTimer):
 
 
     def _stop(self):
-        if not self._value:
-            return
-
         self._enabled._value = False
-        self._trigger = True
+
+        if self._value is None:
+            self._value = False
+            self._active._value = False
+
+        if self._value:
+            self._trigger = True
 
 
     def loop(self):
