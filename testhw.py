@@ -32,24 +32,31 @@ nt = PLCOperandNOT(plc_i2)
 plc_o1.input = nt
 
 # Test timer 2 sec Power On Delay
-#  Input 2
+#  Input 2 RS-SET
+#  Input 3 RS-RESET
 #  Output 2 timer Done bit (output)
 #  Output 3 timer Enable bit
 #  Output 4 timer Active bit
 #rs1 = PLCElementRS(plc_i2, plc_i3)
 #ton = PLCTimerOn(rs1, 2000, "TON1")
+#plc_o2.input = ton
+#plc_o3.input = ton.enabled
+#plc_o4.input = ton.activated
+
+# Test timer 2 sec Power Off Delay
+#  Input 2
+#  Output 2 timer Done bit (output)
+#  Output 3 timer Enable bit
+#  Output 4 timer Active bit
 toff = PLCTimerOff(plc_i2, 2000, "TOFF1")
 
-ton_nt_dn = PLCOperandNOT(toff, "NOT: DN")
-plc_o2.input = ton_nt_dn
+plc_o2.input = toff
+plc_o3.input = toff.enabled
+plc_o4.input = toff.activated
 
-ton_nt_en = PLCOperandNOT(toff.enabled, "NOT: EN")
-plc_o3.input = ton_nt_en
-
-ton_nt_tt = PLCOperandNOT(toff.activated, "NOT: TT")
-plc_o4.input = ton_nt_tt
-
+print("Starting main loop")
 while True:
-    toff.loop()
     plc_i2.read()
+    plc_i3.read()
+    toff.loop()
 #    ton.loop()
