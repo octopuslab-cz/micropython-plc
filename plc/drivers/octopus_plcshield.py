@@ -35,7 +35,7 @@ class PLCOutputPin(PLCPin, PLCOutput):
 
 
     def _on_change(self, obj, value, direction):
-        self.value = value
+        self.value = not value
 
 
 class PLCInputPin(PLCPin, PLCInput):
