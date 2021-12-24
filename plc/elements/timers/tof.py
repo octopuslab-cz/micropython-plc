@@ -57,6 +57,7 @@ class PLCTimerOff(PLCTimer):
         if self._amount <= self.delay:
             return
 
+        print("Loop thread timeout after {}ms".format(ticks_ms() - self._start_time))
         self._value = False
         self._active._value = False
         self._trigger = False
