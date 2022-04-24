@@ -54,6 +54,7 @@ class PLCTimer(PLCBase):
 
         self._delay = delay
 
+
     @property
     def enabled(self):
         return self._enabled

@@ -45,4 +45,6 @@ class PLCInputPin(PLCPin, PLCInput):
 
 
     def read(self):
+        # Set input pin before reading real value
+        self._pin.value = True
         self._value = self._pin.value
