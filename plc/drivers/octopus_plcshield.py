@@ -16,15 +16,16 @@ class PLCOctopusLabShield():
 class PLCPin():
     def __init__(self, pin):
         self._pin = pin
-    
+
+
     @property
     def value(self):
         return self._pin.value
-    
+
+
     @value.setter
     def value(self, value):
         self._pin.value = value
-
 
 
 class PLCOutputPin(PLCPin, PLCOutput):
@@ -34,8 +35,18 @@ class PLCOutputPin(PLCPin, PLCOutput):
         self.add_event_on_change(self._on_change)
 
 
+    @property
+    def value(self):
+        return not self._pin.value
+
+
+    @value.setter
+    def value(self, value):
+        self._pin.value = not value
+
+
     def _on_change(self, obj, value, direction):
-        self.value = not value
+        self._pin.value = not value
 
 
 class PLCInputPin(PLCPin, PLCInput):
